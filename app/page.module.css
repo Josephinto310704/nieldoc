@@ -306,9 +306,10 @@
     grid-template-columns: 1fr;
   }
   .navbar {
-    flex-direction: column;
-    gap: 24px;
-    padding: 24px;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 16px 20px;
   }
   .footer {
     flex-direction: column;
