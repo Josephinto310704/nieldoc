@@ -47,7 +47,7 @@ export default function HamburgerMenu() {
 
         <div className={styles.sidebarContent}>
           <h2 className={styles.sidebarTitle}>Produk lain</h2>
-          <a href="https://nieldownloader.vercel.app/" target="_blank" rel="noopener noreferrer" className={styles.menuItem}>
+          <a href="https://nieldownloader.vercel.app/" className={styles.menuItem}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
               <span style={{ fontWeight: 800, fontSize: "16px", color: "#FFFFFF", letterSpacing: "-0.5px", fontFamily: "var(--font-poppins)", lineHeight: 1 }}>
                 niel<span style={{ color: "#a855f7" }}>downloader</span>
