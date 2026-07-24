@@ -1,0 +1,261 @@
+.dropzone {
+  border: 2px dashed var(--border);
+  border-radius: 12px;
+  padding: 64px 24px;
+  text-align: center;
+  background: var(--bg-card);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  max-width: 600px;
+  margin: 48px auto;
+}
+
+.dropzone:hover {
+  border-color: var(--primary);
+  background: var(--card-hover-bg);
+}
+
+.iconContainer {
+  color: var(--primary);
+  margin-bottom: 16px;
+}
+
+.dropzoneTitle {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.dropzoneSubtitle {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.loadingState, .successState {
+  text-align: center;
+  padding: 64px 24px;
+  max-width: 600px;
+  margin: 48px auto;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg-card);
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(168, 229, 182, 0.2);
+  border-radius: 50%;
+  border-top-color: var(--primary);
+  animation: spin 1s ease-in-out infinite;
+  margin: 0 auto 24px auto;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.successIcon {
+  font-size: 48px;
+  color: var(--primary);
+  margin-bottom: 16px;
+}
+
+.successState h3 {
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+.successState p {
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+
+.organizerContainer {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.header h3 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.workspace {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+}
+
+.gridContainer {
+  flex: 1;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 24px;
+}
+
+.pageCard {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.2s;
+  position: relative;
+  cursor: pointer;
+}
+
+.pageCard:hover {
+  border-color: rgba(168, 229, 182, 0.5);
+}
+
+.pageCard.selected {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 1px var(--primary);
+}
+
+.pageCard.dragging {
+  opacity: 0.5;
+  transform: scale(0.95);
+  border-style: dashed;
+}
+
+.pageCard.dragOver {
+  border-color: var(--primary);
+  transform: scale(1.02);
+  box-shadow: 0 0 15px rgba(168, 229, 182, 0.4);
+}
+
+.pageCard.deleted {
+  opacity: 0.4;
+}
+
+.pageCard.deleted::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background: red;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+.pageNumber {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  background: var(--primary);
+  color: #000;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 12px;
+  z-index: 5;
+}
+
+.thumbnailWrapper {
+  width: 100%;
+  height: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  transition: transform 0.3s ease;
+}
+
+.thumbnail {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+
+.controls {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.controlBtn {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 4px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.controlBtn:hover:not(:disabled) {
+  background: rgba(255,255,255,0.1);
+}
+
+.controlBtn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.previewPanel {
+  width: 450px;
+  position: sticky;
+  top: 32px;
+  height: calc(100vh - 64px);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.previewTitle {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  color: var(--primary);
+  flex-shrink: 0;
+}
+
+.previewImageWrapper {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+  overflow: hidden;
+}
+
+.previewImage {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+}
