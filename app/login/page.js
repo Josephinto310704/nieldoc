@@ -42,7 +42,7 @@ export default function Login() {
           </div>
           <h1 className={styles.title}>Selamat Datang</h1>
           <p className={styles.subtitle}>
-            Masuk ke NielDoc untuk membuka semua batasan ukuran file dan kuota harian. Sepenuhnya gratis!
+            Masuk ke NielDoc untuk menyimpan riwayat konversi Anda dan menikmati pengalaman yang lebih personal. Sepenuhnya gratis!
           </p>
 
           <button 
