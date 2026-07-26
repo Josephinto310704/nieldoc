@@ -4,6 +4,8 @@ import fs from "fs";
 import os from "os";
 import path from "path";
 
+import { randomUUID } from "crypto";
+
 export async function POST(req) {
   if (!process.env.CLOUDCONVERT_API_KEY || process.env.CLOUDCONVERT_API_KEY === "your_api_key_here") {
     return NextResponse.json({ error: "CloudConvert API Key is not configured." }, { status: 500 });
@@ -24,7 +26,8 @@ export async function POST(req) {
     const password = formData.get("password");
 
     const buffer = Buffer.from(await file.arrayBuffer());
-    const tempFilePath = path.join(os.tmpdir(), `${Date.now()}-${file.name}`);
+    const tempFileName = `${Date.now()}-${randomUUID()}`;
+    const tempFilePath = path.join(os.tmpdir(), tempFileName);
     fs.writeFileSync(tempFilePath, buffer);
 
     let operation = "convert";
