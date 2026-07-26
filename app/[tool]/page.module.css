@@ -1,21 +1,24 @@
 .container {
   min-height: 100vh;
   display: flex;
-  align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
   position: relative;
-  padding: 48px 16px;
+  padding: 80px 16px 48px;
   box-sizing: border-box;
 }
 
 .main {
   max-width: 800px;
   width: 100%;
+  margin-top: -70px;
 }
 
 .mainWide {
   max-width: 1600px;
   width: 100%;
+  margin-top: -70px;
 }
 
 .header {
