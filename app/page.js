@@ -69,7 +69,7 @@ export default async function Home() {
 
   return (
     <div className={styles.container}>
-      <div style={{ borderBottom: "1px solid var(--border)" }}>
+      <div style={{ borderBottom: "1px solid var(--border)", position: "sticky", top: 0, zIndex: 100, backgroundColor: "var(--nav-bg)", backdropFilter: "blur(8px)" }}>
         <header className={styles.navbar}>
           <div style={{ display: "flex", alignItems: "center", gap: "48px" }}>
             <Link href="/" className={styles.navBrand}>niel<span style={{color: 'var(--primary)'}}>doc</span></Link>
