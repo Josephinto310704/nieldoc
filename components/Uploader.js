@@ -2,9 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import styles from "./Uploader.module.css";
-import { checkRateLimit, incrementRateLimit } from "@/utils/rateLimit";
-import { createClient } from "@/utils/supabase/client";
-import AuthModal from "./AuthModal";
+
 
 const formatBytes = (bytes, decimals = 2) => {
   if (bytes === 0) return '0 Bytes';
@@ -21,17 +19,7 @@ export default function Uploader({ toolId, endpoint, accept, multiple, title, de
   const [status, setStatus] = useState("idle"); // idle, processing, success
   const [downloadUrl, setDownloadUrl] = useState(null);
   
-  // Freemium State
-  const [user, setUser] = useState(null);
-  const [showAuthModal, setShowAuthModal] = useState(false);
-  const [authModalMessage, setAuthModalMessage] = useState("");
-  const supabase = createClient();
-
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setUser(session?.user || null);
-    });
-  }, []);
+  // Removed Freemium State
 
   // Image Resizer state
   const [resizeMode, setResizeMode] = useState("auto"); // "auto" or "custom"
@@ -73,19 +61,6 @@ export default function Uploader({ toolId, endpoint, accept, multiple, title, de
   const handleConvert = async () => {
     if (files.length === 0) return;
 
-    // Freemium Check
-    if (!user) {
-      let totalSize = 0;
-      files.forEach(f => totalSize += f.size);
-      
-      const rateLimit = checkRateLimit(totalSize);
-      if (!rateLimit.allowed) {
-        setAuthModalMessage(rateLimit.reason);
-        setShowAuthModal(true);
-        return;
-      }
-    }
-
     setStatus("processing");
     
     // HEIC Client-Side Processing
@@ -109,7 +84,6 @@ export default function Uploader({ toolId, endpoint, accept, multiple, title, de
         a.remove();
         URL.revokeObjectURL(url);
         
-        if (!user) incrementRateLimit();
         setStatus("success");
       } catch (err) {
         console.error(err);
@@ -162,7 +136,6 @@ export default function Uploader({ toolId, endpoint, accept, multiple, title, de
       const blob = await res.blob();
       const url = window.URL.createObjectURL(blob);
       setDownloadUrl(url);
-      if (!user) incrementRateLimit();
       setStatus("success");
     } catch (err) {
       alert("Terjadi kesalahan saat memproses file.");
@@ -296,11 +269,6 @@ export default function Uploader({ toolId, endpoint, accept, multiple, title, de
         </div>
       )}
       
-      <AuthModal 
-        isOpen={showAuthModal} 
-        onClose={() => setShowAuthModal(false)} 
-        message={authModalMessage} 
-      />
     </div>
   );
 }

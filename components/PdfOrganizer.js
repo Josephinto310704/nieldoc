@@ -4,9 +4,7 @@ import { useState, useRef } from "react";
 import styles from "./PdfOrganizer.module.css";
 import * as pdfjsLib from "pdfjs-dist";
 import { PDFDocument, degrees } from "pdf-lib";
-import { checkRateLimit, incrementRateLimit } from "@/utils/rateLimit";
 import { createClient } from "@/utils/supabase/client";
-import AuthModal from "./AuthModal";
 
 // Configure worker for pdfjs-dist using local module
 if (typeof window !== "undefined" && "Worker" in window) {
@@ -26,20 +24,7 @@ export default function PdfOrganizer() {
   const fileInputRef = useRef(null);
   const [originalPdfBytes, setOriginalPdfBytes] = useState(null);
   
-  // Freemium State
-  const [user, setUser] = useState(null);
-  const [showAuthModal, setShowAuthModal] = useState(false);
-  const [authModalMessage, setAuthModalMessage] = useState("");
-  const supabase = createClient();
-
-  // Load user
-  import("react").then(({ useEffect }) => {
-    useEffect(() => {
-      supabase.auth.getSession().then(({ data: { session } }) => {
-        setUser(session?.user || null);
-      });
-    }, []);
-  });
+  // Removed Freemium State
 
   const handleFileChange = async (e) => {
     const selectedFile = e.target.files[0];
@@ -61,16 +46,6 @@ export default function PdfOrganizer() {
   };
 
   const loadPdf = async (fileObj) => {
-    // Freemium Check
-    if (!user) {
-      const rateLimit = checkRateLimit(fileObj.size);
-      if (!rateLimit.allowed) {
-        setAuthModalMessage(rateLimit.reason);
-        setShowAuthModal(true);
-        return;
-      }
-    }
-
     setFile(fileObj);
     setStatus("loading");
     
@@ -224,7 +199,6 @@ export default function PdfOrganizer() {
       a.remove();
       URL.revokeObjectURL(url);
       
-      if (!user) incrementRateLimit();
       setStatus("success");
     } catch (err) {
       console.error(err);
@@ -317,7 +291,7 @@ export default function PdfOrganizer() {
                   </button>
                   <button className={styles.controlBtn} onClick={() => toggleDelete(index)} title={page.deleted ? "Batal Hapus" : "Hapus Halaman"}>
                     {page.deleted ? (
-                      <img src="https://api.iconify.design/lucide:undo-2.svg?color=%23a8e5b6" width="20" height="20" alt="Undo" />
+                      <img src="https://api.iconify.design/lucide:undo-2.svg?color=%23FCA311" width="20" height="20" alt="Undo" />
                     ) : (
                       <img src="https://api.iconify.design/lucide:trash-2.svg?color=%23ff4d4f" width="20" height="20" alt="Delete" />
                     )}
@@ -357,11 +331,6 @@ export default function PdfOrganizer() {
         )}
       </div>
       
-      <AuthModal 
-        isOpen={showAuthModal} 
-        onClose={() => setShowAuthModal(false)} 
-        message={authModalMessage} 
-      />
     </div>
   );
 }

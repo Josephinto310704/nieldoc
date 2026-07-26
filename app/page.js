@@ -18,7 +18,7 @@ const PptIcon = () => <BaseIcon>P</BaseIcon>;
 const ImageIcon = () => <BaseIcon>IMG</BaseIcon>;
 
 const FolderIcon = () => (
-  <img src="https://api.iconify.design/lucide:folder.svg?color=%23a8e5b6" width="32" height="32" alt="Folder" />
+  <img src="https://api.iconify.design/lucide:folder.svg?color=%23FCA311" width="32" height="32" alt="Folder" />
 );
 
 const MergeIcon = () => (
