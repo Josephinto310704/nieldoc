@@ -8,7 +8,7 @@ const poppins = Poppins({ subsets: ["latin"], weight: ["400", "500", "600", "700
 
 export const metadata = {
   title: "nieldoc - Semua Alat Konversi File & Dokumen Gratis",
-  description: "nieldoc adalah solusi lengkap untuk produktivitas dokumen Anda. Konversi PDF ke Word, kompresi gambar, dan modifikasi file secara instan.",
+  description: "Konversi, kompres, dan modifikasi file PDF, Gambar, dan Dokumen dengan aman dan cepat di satu tempat.",
 };
 
 export default function RootLayout({ children }) {

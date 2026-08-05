@@ -64,19 +64,7 @@
   font-weight: 500;
 }
 
-.loginBtn {
-  color: var(--text);
-  transition: color 0.2s;
-}
 
-.getStartedBtn {
-  padding: 8px 16px;
-  font-size: 13px;
-}
-
-.loginBtn:hover {
-  color: var(--primary);
-}
 
 .main {
   flex: 1;

@@ -4,7 +4,6 @@ import { useState, useRef } from "react";
 import styles from "./PdfOrganizer.module.css";
 import * as pdfjsLib from "pdfjs-dist";
 import { PDFDocument, degrees } from "pdf-lib";
-import { createClient } from "@/utils/supabase/client";
 
 // Configure worker for pdfjs-dist using local module
 if (typeof window !== "undefined" && "Worker" in window) {
